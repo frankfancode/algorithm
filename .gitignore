@@ -1,4 +1,10 @@
 *.class
 .setting/*
 bin/*
+out/*
+.idea/*
 
+.idea/
+leetcode.iml
+out/
+src/com/ff/leetcode/TwoSum.java
