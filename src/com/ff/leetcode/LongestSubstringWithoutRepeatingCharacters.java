@@ -4,6 +4,8 @@ package com.ff.leetcode;
  * Created by fxd on 16/8/29.
  */
 
+import java.util.Arrays;
+
 /**
  * Given a string, find the length of the longest substring without repeating characters.
  * <p>
@@ -18,9 +20,9 @@ package com.ff.leetcode;
  */
 public class LongestSubstringWithoutRepeatingCharacters {
     public static void main(String args[]) {
-        String s1 = "ab";
+        String s1 = "aaaa";
         //System.out.println(s1.substring(0,2));
-        System.out.println(lengthOfLongestSubstring(s1));
+        System.out.println(lengthOfLongestSubstring1(s1));
 
     }
 
@@ -49,10 +51,10 @@ public class LongestSubstringWithoutRepeatingCharacters {
 
             int i = endIndex + 1;
             if (i < s.length()) {
-                String s2 = s.substring(i, i + 1);
+                char s2 = s.charAt(i);
                 for (int j = startIndex; j <= endIndex; j++) {
-                    String s1 = s.substring(j, j + 1);
-                    if (s1.equals(s2)) {
+                    char s1 = s.charAt(j);
+                    if (s1==s2) {
                         currentStartIndex = j + 1;
                         break;
                     } else {
@@ -86,6 +88,34 @@ public class LongestSubstringWithoutRepeatingCharacters {
 
         }
         return lastEndIndex+1 - lastStartIndex;
+    }
+
+    public static int lengthOfLongestSubstring1(String s) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        int length = s.length();
+        if (length == 0) {
+            return 0;
+        }
+        int [] countTable = new int[256];
+        Arrays.fill(countTable, -1);
+        int max = 1;
+        int start = 0;
+        int end = 1;
+
+        countTable[s.charAt(0)] = 0;
+        while (end < length) {
+            //Has not reached a duplicate char
+            int c=s.charAt(end);
+            int countTableValue=countTable[c];
+            if (countTableValue >= start) {
+                start = countTable[s.charAt(end)] + 1;
+            }
+            max = Math.max(max, end - start + 1);
+            countTable[s.charAt(end)] = end;
+            end++;
+        }
+        return max;
     }
 
 }
