@@ -15,13 +15,18 @@ public class LongestPalindromicSubstring {
 
     /**
      * 动态规划
-     *
+     * 参考   http://blog.csdn.net/hopeztm/article/details/7932245k
      * @param s
      * @return
      */
     public static String longestPalindrome_DP(String s) {
         int length = s.length();
         boolean dp[][] = new boolean[length][length];
+
+        if (s.length()<=1){
+            return s;
+        }
+
 
         for (int i = 0; i < length; i++) {
             for (int j = 0; j < length; j++) {
@@ -34,15 +39,11 @@ public class LongestPalindromicSubstring {
         }
 
         int maxPalindromeS = 1;
-        int k = 1;
         int j = 0;
         int pI = 0, pJ = 0;
+        
 
-        if (s.length()==1){
-            return s;
-        }
-
-        for (k = 1; k < length; k++) {
+        for (int k = 1; k < length; k++) {
             for (int i = 0; i + k < length; i++) {
                 j = i + k;
                 System.out.println("i: " + i + " k : " + k + " s: " + s.substring(i, j + 1));
