@@ -25,6 +25,7 @@ public class OddChange {
             while (l < r && nums[r] % 2 == 0) {
                 r--;
             }
+            System.out.println("nums[" + l + "] " + nums[l] + " nums[" + r + "] " + nums[r] + " " + Arrays.toString(nums));
             swap(nums, l, r);
         }
         return nums;
