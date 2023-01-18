@@ -5,6 +5,8 @@ package com.ff.leetcode;
  * 10. 正则表达式匹配
  * 10. Regular Expression Matching
  * https://leetcode.cn/problems/regular-expression-matching/
+ *
+ * 这个比较难，在题解的帮助下做了两天 20230118
  */
 public class Issue10 {
     public static void main(String[] args) {
