@@ -8,7 +8,15 @@ public class Utils {
     public static String toString(boolean[][] arr) {
         StringBuffer stringBuffer = new StringBuffer();
         Arrays.stream(arr).forEach(subArr -> {
-            stringBuffer.append(Arrays.toString(subArr)+'\n');
+            stringBuffer.append(Arrays.toString(subArr)).append('\n');
+        });
+        return stringBuffer.toString();
+    }
+
+    public static String toString(int[][] arr) {
+        StringBuffer stringBuffer = new StringBuffer();
+        Arrays.stream(arr).forEach(subArr -> {
+            stringBuffer.append(Arrays.toString(subArr)).append('\n');
         });
         return stringBuffer.toString();
     }
