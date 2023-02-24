@@ -2,7 +2,6 @@ package com.ff.utils;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Utils {
     public static String toString(boolean[][] arr) {
@@ -15,13 +14,34 @@ public class Utils {
 
     public static String toString(int[][] arr) {
         StringBuffer stringBuffer = new StringBuffer();
-        Arrays.stream(arr).forEach(subArr -> {
-            stringBuffer.append(Arrays.toString(subArr)).append('\n');
-        });
+        for (int i = 0; i < arr.length; i++) {
+            stringBuffer.append("[");
+            for (int j = 0; j < arr[i].length; j++) {
+                if (j == arr[i].length - 1) {
+                    stringBuffer.append(arr[i][j]).append("" + addWhite(String.valueOf(arr[i][j]), 4));
+                } else {
+                    stringBuffer.append(arr[i][j]).append(","+ addWhite(String.valueOf(arr[i][j]), 4));
+                }
+
+            }
+            stringBuffer.append("]\n");
+        }
+//        Arrays.stream(arr).forEach(subArr -> {
+//            stringBuffer.append(Arrays.toString(subArr)).append('\n');
+//        });
         return stringBuffer.toString();
     }
 
-    public static String toString(List<String> list){
+    public static String toString(List<String> list) {
         return String.join(",", list);
+    }
+
+    public static String addWhite(String s, int number) {
+        StringBuffer stringBuffer = new StringBuffer();
+        int left = number-s.length();
+        for (int i = 0; i < left; i++) {
+            stringBuffer.append(" ");
+        }
+        return stringBuffer.toString();
     }
 }
