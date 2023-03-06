@@ -18,9 +18,9 @@ public class Utils {
             stringBuffer.append("[");
             for (int j = 0; j < arr[i].length; j++) {
                 if (j == arr[i].length - 1) {
-                    stringBuffer.append(arr[i][j]).append("" + addWhite(String.valueOf(arr[i][j]), 4));
+                    stringBuffer.append(arr[i][j]).append("" + addWhite(String.valueOf(arr[i][j]), 8));
                 } else {
-                    stringBuffer.append(arr[i][j]).append(","+ addWhite(String.valueOf(arr[i][j]), 4));
+                    stringBuffer.append(arr[i][j]).append("," + addWhite(String.valueOf(arr[i][j]), 8));
                 }
 
             }
@@ -38,10 +38,16 @@ public class Utils {
 
     public static String addWhite(String s, int number) {
         StringBuffer stringBuffer = new StringBuffer();
-        int left = number-s.length();
+        int left = number - s.length();
         for (int i = 0; i < left; i++) {
             stringBuffer.append(" ");
         }
         return stringBuffer.toString();
+    }
+
+    public static void equalOrException(Object need, Object actual) {
+        if (need != actual) {
+            throw new RuntimeException("need:" + need.toString() + "\t actual:" + actual.toString());
+        }
     }
 }

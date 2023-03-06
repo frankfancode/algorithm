@@ -1,5 +1,7 @@
 package com.ff.leetcode;
 
+import com.ff.utils.Utils;
+
 public class Issue743NetWorkDelay {
     public static void main(String[] args) {
         System.out.println(new Issue743NetWorkDelay().networkDelayTime(new int[][]{{2, 1, 1}, {2, 3, 1}, {3, 4, 1}}, 4, 2));
@@ -13,6 +15,8 @@ public class Issue743NetWorkDelay {
 //        System.out.println(new Issue743NetWorkDelay().networkDelayTime(new int[][]{{4, 2, 76}, {1, 3, 79}, {3, 1, 81}, {4, 3, 30}, {2, 1, 47}, {1, 5, 61}, {1, 4, 99}, {3, 4, 68}, {3, 5, 46}, {4, 1, 6}, {5, 4, 7}, {5, 3, 44}, {4, 5, 19}, {2, 3, 13}, {3, 2, 18}, {1, 2, 0}, {5, 1, 25}, {2, 5, 58}, {2, 4, 77}, {5, 2, 74}}, 5, 3));
     }
 
+    static int INF = Integer.MAX_VALUE / 1024;
+
     public int networkDelayTime(int[][] times, int n, int k) {
         int[][] resultTimes = new int[n + 1][n + 1];
 
@@ -23,11 +27,10 @@ public class Issue743NetWorkDelay {
                 } else if (j == 0) {
                     resultTimes[i][j] = i;
                 } else if (i != j) {
-                    resultTimes[i][j] = Integer.MAX_VALUE;
+                    resultTimes[i][j] = INF;
                 } else {
                     resultTimes[i][j] = 0;
                 }
-
             }
         }
 
@@ -39,15 +42,15 @@ public class Issue743NetWorkDelay {
         int node = k;
         int[] processedNodeSet = new int[n + 1];
         while (node > 0) {
-//            System.out.println("node: " + node + "\n" + Utils.toString(resultTimes));
+            System.out.println("node: " + node + "\n" + Utils.toString(resultTimes));
 
             for (int i = 1; node < n + 1 && i < n + 1; i++) {
-                if (node == i || resultTimes[node][i] == Integer.MAX_VALUE) {
+                if (node == i || resultTimes[node][i] == INF) {
                     continue;
                 }
 
                 int length = resultTimes[k][node] + resultTimes[node][i];
-                if (resultTimes[k][i] == Integer.MAX_VALUE) {
+                if (resultTimes[k][i] == INF) {
                     resultTimes[k][i] = length;
                 } else if (resultTimes[k][i] > length) {
                     resultTimes[k][i] = length;
@@ -65,24 +68,22 @@ public class Issue743NetWorkDelay {
             if (i == k) {
                 continue;
             }
-            if (resultTimes[k][i] == Integer.MAX_VALUE) {
+            if (resultTimes[k][i] == INF) {
                 return -1;
             } else if (resultTimes[k][i] > max) {
                 max = resultTimes[k][i];
             }
         }
 
-//        System.out.println("last ones node: " + node + "\n" + Utils.toString(resultTimes));
+        System.out.println("last ones node: " + node + "\n" + Utils.toString(resultTimes));
 
         return max;
     }
 
 
-
-
     private int findNextNode(int[][] resultTimes, int[] processedNodeSet, int node) {
         int nextNode = 0;
-        int minValue = Integer.MAX_VALUE;
+        int minValue = INF;
         for (int i = 1; i < resultTimes[node].length; i++) {
             if (node != i && processedNodeSet[i] != 1 && resultTimes[node][i] < minValue) {
                 nextNode = i;
