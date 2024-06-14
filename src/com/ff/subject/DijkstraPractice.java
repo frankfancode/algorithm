@@ -1,13 +1,15 @@
 package com.ff.subject;
 
+import com.ff.utils.Utils;
+
 import java.util.*;
 
 public class DijkstraPractice {
 
     static class Node {
-        public Node(String v, int widget) {
+        public Node(String v, int weight) {
             this.key = v;
-            this.weight = widget;
+            this.weight = weight;
         }
 
         String key;
@@ -17,31 +19,25 @@ public class DijkstraPractice {
     public static void main(String[] args) {
         Map<String, List<Node>> graph = new HashMap<>();
         List<Node> list = new LinkedList<>();
-        list.add(new Node("A", 5));
+
+
+
+        list.add(new Node("A", 6));
         list.add(new Node("B", 2));
         graph.put("START", list);
 
         list = new LinkedList<>();
-        list.add(new Node("C", 4));
-        list.add(new Node("D", 2));
+        list.add(new Node("FIN", 1));
         graph.put("A", list);
 
         list = new LinkedList<>();
-        list.add(new Node("D", 7));
-        list.add(new Node("A", 8));
+        list.add(new Node("FIN", 5));
+        list.add(new Node("A", 3));
         graph.put("B", list);
 
-        list = new LinkedList<>();
-        list.add(new Node("FIN", 3));
-        list.add(new Node("D", 6));
-        graph.put("C", list);
-
-        list = new LinkedList<>();
-        list.add(new Node("FIN", 1));
-        graph.put("D", list);
 
         Map<String, Integer> costs = new HashMap<>();
-        costs.put("A", 5);
+        costs.put("A", 6);
         costs.put("B", 2);
         costs.put("C", Integer.MAX_VALUE);
         costs.put("D", Integer.MAX_VALUE);
@@ -59,6 +55,7 @@ public class DijkstraPractice {
         String node = findLowestNode(costs, processed);
         while (node != null) {
             List<Node> nodes = graph.get(node);
+
             for (int i = 0;nodes !=null && i < nodes.size(); i++) {
                 Integer cost = costs.get(nodes.get(i).key);
                 if (cost != null && nodes.get(i).weight + costs.get(node) < cost) {
